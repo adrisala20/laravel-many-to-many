@@ -51,6 +51,23 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
+            <!-- TECHNOLOGIES -->
+            <div class="mb-3">
+                <label for="technology_id" class="form-label text-white">Select Techonologies</label>
+                <div id="technology_id">
+                    @foreach ($technologies as $technology)
+                        <div class="form-check form-check-inline text-white">
+                            <input class="form-check-input" type="checkbox" name="technologies[]" id="inlineCheckbox1"
+                                value="{{ $technology->id }}"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="inlineCheckbox1">{{ $technology->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+                @error('technologies')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <!-- BUTTONS -->
             <div class="mb-3">
                 <button type="submit" class="btn btn-danger">Create</button>

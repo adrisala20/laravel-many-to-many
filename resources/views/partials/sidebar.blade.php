@@ -13,8 +13,11 @@
         </li>
         <!-- link categories -->
         <li class="nav-item">
-          <a class="nav-link  text-white {{Route::currentRouteName() == 'admin.categories.index' ? 'active' : ''}}" href="{{route('admin.categories.index')}}"> <i class="fa-solid fa-newspaper fa-lg fa-fw"></i>Categories</a>
+          <a class="nav-link  text-white {{Route::currentRouteName() == 'admin.categories.index' ? 'active' : ''}}" href="{{route('admin.categories.index')}}"> <i class="fa-solid fa-layer-group fa-lg fa-fw"></i>Categories</a>
         </li>
-
+        <!-- link technologies0 -->
+        <li class="nav-item">
+          <a class="nav-link  text-white {{Route::currentRouteName() == 'admin.technologies.index' ? 'active' : ''}}" href="{{route('admin.technologies.index')}}"> <i class="fa-solid fa-microchip fa-lg fa-fw"></i>Technologies</a>
+        </li>
       </ul>
     </nav>

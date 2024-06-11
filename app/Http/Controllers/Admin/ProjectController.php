@@ -57,7 +57,10 @@ class ProjectController extends Controller
         }
 
         $newProject = Project::create($form_data);
-        return redirect()->route('admin.projects.show', $newProject->slug)->with('message' , ' New project succesfull created ');
+        if ($request->has('technologies')) {
+            $newProject->technologies()->attach($request->technologies);
+        }
+        return redirect()->route('admin.projects.index', $newProject->slug)->with('message' , ' New project succesfull created ');
     }
 
     /**
@@ -104,8 +107,14 @@ class ProjectController extends Controller
         $project->update($form_data); //query da eseguire
         // $query = DB::getQueryLog();
         // dd($query);
-        return redirect()->route("admin.projects.show", $project->slug);
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies); //controlla se ci sono stati dei check
+        } else {
+            $project->technologies()->sync([]);
+        }
+        return redirect()->route("admin.projects.show")->with('message', "Project (id:{$project->id}): {$project->title} succesfully edited ");
     }
+
 
     /**
      * Remove the specified resource from storage.

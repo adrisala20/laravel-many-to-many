@@ -27,9 +27,18 @@
             <p class="my-3">{{$project->content}}</p>
         </div>      
     </div>
+    <!-- CATEGORIES -->
     @if($project->category)
     <p class="my-3 badge text-bg-info">{{$project->category->name}}</p>
     @endif
+    <!-- TECHNOLOGIES -->
+    <div class="m-3">
+        @if($project->Technology)
+            @foreach ($project->Technology as $tag)
+            <span class="badge text-bg-danger">{{$technology->name}}</span>
+            @endforeach
+        @endif
+    </div>
 
 </section>
 @include('partials.modal-delete')

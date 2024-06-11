@@ -65,6 +65,20 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
+             <!-- TECHNOLOGIES -->
+             <div class="form-group mb-3">
+                <p>Select technologies:</p>
+                @foreach ($technologies as $technology)
+                    <div>
+                        <input type="checkbox" name="technologies[]" value="{{ $technology->id }}" class="form-check-input"
+                            {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                        <label for="technology_id" class="form-check-label">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
+                @error('technologies')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <!-- BUTTONS -->
             <div class="mb-3">
                 <button type="submit" class="btn btn-danger">Save</button>
