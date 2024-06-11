@@ -24,5 +24,6 @@ class Technology extends Model
         }
         return $slug;
     }
+    
 
 }

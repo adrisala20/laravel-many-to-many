@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use App\Models\Category;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreProjectRequest;
