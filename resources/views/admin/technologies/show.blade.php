@@ -1,18 +1,18 @@
 @extends('layouts.admin')
-@section('title', $category->name)
+@section('title', $technology->name)
 @section('content')
 <section>
     <div class="d-flex justify-content-between align-items-center py-4">
       <!-- title -->
-        <h1>{{$category-> name }}</h1>
+        <h1>{{$technology-> name }}</h1>
         <!-- buttons -->
         <div>
-            <a href="{{route('admin.categories.edit',$category->slug)}}" class="btn btn-secondary">Edit</a>
-            <form action="{{route('admin.categories.destroy', $category->slug)}}" method="POST" class="d-inline-block">
+            <a href="{{route('admin.technologies.edit',$technology->slug)}}" class="btn btn-secondary">Edit</a>
+            <form action="{{route('admin.technologies.destroy', $technology->slug)}}" method="POST" class="d-inline-block">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="delete-button btn btn-danger"  data-item-title="{{ $category->name }}">
-                 Delete Category</i>
+                <button type="submit" class="delete-button btn btn-danger"  data-item-title="{{ $technology->name }}">
+                 Delete technology</i>
                 </button>
               </form>
         </div>
@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($category->projects as $project)
+            @foreach ($technology->projects as $project)
             <tr>
                 <td>{{$project->id}}</td>
                 <td>{{$project->title}}</td>

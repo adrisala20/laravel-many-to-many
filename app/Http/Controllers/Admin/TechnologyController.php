@@ -22,7 +22,8 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        $technologies = Technology::all();
+        return view('admin.technologies.create', compact('technologies'));
     }
 
     /**
@@ -30,7 +31,13 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:200',
+        ]);
+        $form_data = $request->all();
+        $form_data['slug'] = Technology::generateSlug($form_data['name']);
+        $newTechnology = Technology::create($form_data);
+        return redirect()->route('admin.technology.show', $newTechnology->slug);
     }
 
     /**
@@ -38,7 +45,8 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+        $technologies = Technology::all();
+        return view('admin.technologies.show', compact('technology'));
     }
 
     /**
@@ -46,7 +54,8 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        $technologies = Technology::all();
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
@@ -54,7 +63,15 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, Technology $technology)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:200',
+        ]);
+        $form_data = $request->all();
+        if ($technology->name !== $form_data['name']) {
+            $form_data['slug'] = Technology::generateSlug($form_data['name']);
+        }
+        $technology->update($form_data);
+        return redirect()->route('admin.technologies.show', $technology->slug);
     }
 
     /**
@@ -62,6 +79,7 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+        return redirect()->route('admin.technologies.index')->with('message', $technology->name . ' deleted successfully');
     }
 }
